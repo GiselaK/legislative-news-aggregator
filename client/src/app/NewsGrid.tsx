@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Modal, Box, Button, Typography } from '@mui/material';
 
-const NewsGrid = () => {
+interface Article {
+    description: string;
+    published_date: string;
+    state: string;
+    topic: string;
+    title: string;
+  }
+
+interface NewsGridProps {
+    articles: Article[]
+}
+
+const NewsGrid = ({articles}: NewsGridProps) => {
   const [open, setOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRow, setSelectedRow] = useState<Article | null>(null);
+
 
   // Sample row data
-  const rows = [
-    { 
-        description: "Uncertainty around the economy, state spending, the Los Angeles wildfires and the Trump administration could still change the state’s budget picture by the May budget revision",
-        id: 1,
-        state: "CA",
-        topic: "California Budget",
-        published_date: "01/13/2025",
-        title: "Newsom's $322B budget proposes some new spending in light of modest surplus"
-    }
-  ];
 
   // Columns for the DataGrid
   const columns = [
@@ -28,8 +31,8 @@ const NewsGrid = () => {
   ];
 
   // Handle opening the modal with row details when a row is clicked
-  const handleRowClick = (params) => {
-    setSelectedRow(params.row);  // Set the clicked row's data
+  const handleRowClick = (event: { row: Article }) => {
+    setSelectedRow(event.row);  // Set the clicked row's data
     setOpen(true);  // Open the modal
   };
 
@@ -43,7 +46,7 @@ const NewsGrid = () => {
     <div style={{ height: 400, width: '100%' }}>
       {/* DataGrid with onRowClick event */}
       <DataGrid 
-        rows={rows} 
+        rows={articles} 
         columns={columns} 
         getRowHeight={() => 'auto'}
         // pageSize={5} 
@@ -65,7 +68,8 @@ const NewsGrid = () => {
             minWidth: 400,
           }}
         >
-          <Typography variant="h6" component="h2" gutterBottom>
+          {/* TODO: Use for Article Details  */}
+          {/* <Typography variant="h6" component="h2" gutterBottom>
             Details for {selectedRow?.name}
           </Typography>
           <Typography variant="body1">
@@ -73,7 +77,7 @@ const NewsGrid = () => {
           </Typography>
           <Typography variant="body1">
             <strong>Job:</strong> {selectedRow?.job}
-          </Typography>
+          </Typography> */}
           <Button
             onClick={handleClose}
             variant="contained"
