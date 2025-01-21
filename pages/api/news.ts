@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const cachedNews = await client.get('cached_news');
 
     if (cachedNews) {
-      return res.status(200).json(JSON.parse(cachedNews));
+      return res.status(200).json({articles: JSON.parse(cachedNews)});
     }
 
     const newsArticles = await fetchNewsFromAPI();

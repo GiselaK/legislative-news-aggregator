@@ -27,7 +27,7 @@ const NewsGrid = ({articles}: NewsGridProps) => {
     { field: 'description', headerName: 'Description', width: 400, wrapText: true },
     { field: 'state', headerName: 'State', width: 100 },
     { field: 'topic', headerName: 'Topic', width: 200 },
-    { field: 'published_date', headerName: 'Published Date', width: 150 }
+    { field: 'publishedAt', headerName: 'Published Date', width: 150 }
   ];
 
   // Handle opening the modal with row details when a row is clicked
