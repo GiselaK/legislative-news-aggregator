@@ -3,7 +3,8 @@ import {
   Container,
 } from '@mui/material';
 
-import NewsGrid from './NewsGrid';
+import NewsGrid from '../components/NewsGrid';
+
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3001/news');
+      const response = await fetch('http://localhost:3000/api/news');
       const jsonData = await response.json();
       setArticles(jsonData.articles);
     };
