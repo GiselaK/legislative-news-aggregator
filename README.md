@@ -30,32 +30,26 @@ Follow the steps below to set up the project locally:
 
     ```
     NEWS_API_KEY = 
-
 3. Install NVM (https://github.com/nvm-sh/nvm) if you don't have it installed yet and then run.
 
     ```
     nvm use v21.6.1
-
 4. Install packages
 
     ``` 
     npm install
-
 5. Install Redis
 
     ```
     brew install redis
-
 6. Run redis server
 
     ```
     redis-server
-
 7. Open another terminal tab/window and run
 
     ```
     npm run dev
-
 8. Open http://localhost:3000/
 
 
@@ -133,13 +127,16 @@ Follow the steps below to set up the project locally:
     Switch to Styled Components:
     Replace inline styles with styled-components.
 
+    No Results View:
+    When there are no results display a user friendly message letting them know.
+
     Improve Skeletons:
     Match the shape of loading skeletons exactly to the corresponding data cards.
 
     Title Cleanup:
     Consider removing source names from titles (e.g., parts after dashes) and displaying them elsewhere. Verify dashes are consistently used for sources only.
 
-9. Developer Experience
+10. Developer Experience
 
     Prettier Integration:
     Add Prettier to maintain consistent code formatting.
