@@ -52,6 +52,13 @@ Follow the steps below to set up the project locally:
     npm run dev
 8. Open http://localhost:3000/
 
+## Code Quality
+
+To ensure consistent and high-quality code, the project uses **ESLint** for linting.
+
+Run Linting:
+   
+    npm run lint
 
 ## Further Enhancements
 
