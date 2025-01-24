@@ -171,7 +171,10 @@ Follow the steps below to set up the project locally:
     Title Cleanup:
     Consider removing source names from titles (e.g., parts after dashes) and displaying them elsewhere. Verify dashes are consistently used for sources only.
 
-10. Developer Experience
+    Images:
+    Consider caching or not displaying external images.
+
+11. Developer Experience
 
     Prettier Integration:
     Add Prettier to maintain consistent code formatting.
