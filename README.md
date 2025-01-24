@@ -60,9 +60,7 @@ Follow the steps below to set up the project locally:
     Expand API Support:
     The Redis articles table schema currently mirrors the News API structure (with an added id). To scale and support multiple APIs or user-submitted articles, create a relational database for the application. Add helper methods to transform API responses into this unified schema.
 
-    Proposed Database Schema for this application
-
-    Proposed Database Schema:
+    MVP Database Schema for this application:
 
         Articles:
             author: string
