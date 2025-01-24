@@ -8,6 +8,7 @@ A web application that gets legislative news articles from News API (https://new
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
+  - [Code Quality](#code-quality)
   - [Further Enhancements](#further-enhancements)
 
 ## Features
