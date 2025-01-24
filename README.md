@@ -56,11 +56,9 @@ Follow the steps below to set up the project locally:
 ## Further Enhancements
 
 1. API Integration & Data Handling
+    - The Redis articles table schema currently mirrors the News API structure (with an added id). To scale and support multiple APIs or user-submitted articles, create a relational database for the application. Add helper methods to transform API responses into this unified schema.
 
-    Expand API Support:
-    The Redis articles table schema currently mirrors the News API structure (with an added id). To scale and support multiple APIs or user-submitted articles, create a relational database for the application. Add helper methods to transform API responses into this unified schema.
-
-    MVP Database Schema for this application:
+   MVP Database Schema for this application:
 
         Articles:
             author: string
@@ -95,89 +93,45 @@ Follow the steps below to set up the project locally:
             user_id: uuid
 
 
-    Add Topic Support:
-    Although the News API "everything" endpoint doesn’t support topics/categories directly, implementing a topics dropdown for users would enhance the experience. This can be done similarly to states, storing topic-based searches in Redis for reuse, as they are likely to be commonly clicked.
-
-    Indexing for Scalability:
-    Introduce indexing for faster data retrieval and scalability. Use indexes for fields used in search such as article names and descriptions
+    - Although the News API "everything" endpoint doesn’t support topics/categories directly, implementing a topics dropdown for users would enhance the experience. This can be done similarly to states, storing topic-based searches in Redis for reuse, as they are likely to be commonly clicked.
+    - Introduce indexing for faster data retrieval and scalability. Use indexes for fields used in search such as article names and descriptions
 
 3. Caching & Storage Enhancements
-
-    Optimize Redis for Common Queries:
-    In addition to caching by states and topics, track commonly searched combinations of filters (e.g., "fires + California") and store those queries in Redis for faster retrieval without requiring fresh API searches.
-    
-    Hybrid Storage Approach:
-    Continue using Redis for frequently queried data and use SQL database to query for less common searches.
-
-    Elasticsearch for Advanced Search:
-    Consider integrating elasticsearch to facilitate filtering capabilities across large datasets. 
-
-    Pre-Fetch Data:
-    Currently, Redis waits until a user performs a search to cache results. Instead, implement background tasks to pre-fetch and cache data for popular states and topics. This will improve performance, especially when scaling to multiple APIs.
+    - In addition to caching by states and topics, track commonly searched combinations of filters (e.g., "fires + California") and store those queries in Redis for faster retrieval without requiring fresh API searches. 
+    - Continue using Redis for frequently queried data and use SQL database to query for less common searches.
+    - Consider integrating elasticsearch to facilitate filtering capabilities across large datasets. 
+    - Currently, Redis waits until a user performs a search to cache results. Instead, implement background tasks to pre-fetch and cache data for popular states and topics. This will improve performance, especially when scaling to multiple APIs.
 
 4. Data Maintenance
-
-    Sorting & Expiry:
     - Sort articles by the newest date in the API endpoints.
     - Implement an expiration policy for articles stored in the database (e.g., depending on application use cases, consider removing old rarely accessed articles).
-
-    
-    Deduplication:
-    Deduplicate articles by comparing their published date, title, and author. If all match, assume they are identical.
+    - Deduplicate articles by comparing their published date, title, and author. If all match, assume they are identical.
 
 5. Performance & Optimization
-
-    Infinite Scrolling:
-    Retrieve a larger initial page size for news articles and implement infinite scrolling to fetch additional articles to create a seamless UX for large datasets.
-
-    Rate-Limiting:
-    Add rate limiting to backend endpoints.
-    
-    Time Zones:
-    Account for time zone differences in article timestamps and user activity.
+    - Retrieve a larger initial page size for news articles and implement infinite scrolling to fetch additional articles to create a seamless UX for large datasets.
+    - Add rate limiting to backend endpoints.
+    - Account for time zone differences in article timestamps and user activity.
 
 6. Testing & QA
-
-    Unit Testing:
-    Add unit tests for both front-end and back-end components.
-
-    Automated Testing:
-    Implement automated end-to-end testing for key workflows.
+    - Add unit tests for both front-end and back-end components.
+    - Implement automated end-to-end test for search text field and state select.
 
 7. Internationalization
-
-    Translations:
-    Use i18n to provide in-app vocabulary translations. Utilize language param in News API. Consider a translating service when adding other news API's that don't support language or adding feature for custom articles.
+   - Use i18n to provide in-app vocabulary translations
+   - Utilize language param in News API.
+   - Consider a translating service when adding other news API's that don't support language or adding feature for custom articles.
 
 8. Error Handling
-
-    Front-End:
-    Handle internal API errors by providing user-friendly error messages.
-
-    Back-End:
-    Implement error handling for external API failures so that user ideally doesn't notice (When there are multiple API's it should still be functional if one external API call fails).
+   - Handle internal API errors by providing user-friendly error messages.
+   - Implement error handling for external API failures so that user ideally doesn't notice (When there are multiple API's it should still be functional if one external API call fails).
 
 9. Styling & UI Improvements
+    - Switch from inline to Styled Components
+    - Consider caching or not displaying external images.
+    - When there are no results display a user friendly message letting them know.
+    - Match the shape of loading skeletons exactly to the corresponding data cards.
+    - Consider removing source names from titles (e.g., parts after dashes) and displaying them elsewhere. Verify dashes are consistently used for sources only.
 
-    Switch to Styled Components:
-    Replace inline styles with styled-components.
-
-    No Results View:
-    When there are no results display a user friendly message letting them know.
-
-    Improve Skeletons:
-    Match the shape of loading skeletons exactly to the corresponding data cards.
-
-    Title Cleanup:
-    Consider removing source names from titles (e.g., parts after dashes) and displaying them elsewhere. Verify dashes are consistently used for sources only.
-
-    Images:
-    Consider caching or not displaying external images.
-
-11. Developer Experience
-
-    Prettier Integration:
-    Add Prettier to maintain consistent code formatting.
-
-    Logging:
-    Add detailed backend logs to track errors, API usage, and performance.
+10. Developer Experience
+    - Add Prettier to maintain consistent code formatting.
+    - Add backend logs to track errors, API usage, and performance.
