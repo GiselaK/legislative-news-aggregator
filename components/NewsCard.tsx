@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Button, Card, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Skeleton, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Skeleton, Typography } from '@mui/material';
 import { Article } from '../types/article';
 
 const cardHeight = 400;
 const fallbackImage = '/assets/stateaffairs_logo.jpg';
 const imgHeight = 140;
 
-const NewsCard = ({ title, description, urlToImage, url, publishedAt }: Article) => {
+const NewsCard = ({ author, description, publishedAt, title, url, urlToImage }: Article) => {
   const [open, setOpen] = useState(false); 
   const formattedDate = new Date(publishedAt).toLocaleDateString();
 
@@ -78,15 +78,25 @@ const NewsCard = ({ title, description, urlToImage, url, publishedAt }: Article)
               sx={{ marginBottom: 2 }}
             />
           )}
-        <DialogContent>
-          <Typography variant="body1" color="text.primary" sx={{ marginBottom: 2 }}>
-            <strong>Published on:</strong> {formattedDate}
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ marginBottom: 2 }}>
-            <strong>Description:</strong> {description}
-          </Typography>
+<DialogContent>
+<Grid container spacing={2} sx={{ marginBottom: 2 }}>
+          <Grid item xs={6}>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Author:</strong> {author || 'Unknown Author'}
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Published on:</strong> {formattedDate}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Typography variant="body2" color="text.secondary" sx={{ marginBottom: 2 }}>
+          <strong>Description:</strong> {description}
+        </Typography>
         </DialogContent>
-        <DialogActions>
+<DialogActions>
           <Button onClick={() => setOpen(false)} color="primary">
             Close
           </Button>
