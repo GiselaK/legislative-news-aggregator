@@ -19,26 +19,27 @@ const SearchFilterBar = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedState, setSelectedState] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [typing, setTyping] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTyping(true);
       const value = e.target.value;
-      clearTimeout((handleSearchChange as any)._timeout);
 
-      (handleSearchChange as any)._timeout = setTimeout(() => {
-        setTyping(false);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current); 
+      }
+
+      // Wait 500ms after user stops typing to call API
+      timeoutRef.current = setTimeout(() => {
         setSearchTerm(value);
-      }, 500); // Wait 500ms after the user stops typing
+      }, 500); 
     },
     []
   );
 
   const fetchArticles = async () => {
-    setLoading(true);
     setIsFetching(true);
     try {
       const params = new URLSearchParams();
@@ -53,7 +54,6 @@ const SearchFilterBar = ({
       console.error('Error fetching articles:', error);
       setFilteredArticles([]);
     } finally {
-      setLoading(false);
       setIsFetching(false); 
     }
   };

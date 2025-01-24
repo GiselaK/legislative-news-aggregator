@@ -1,9 +1,10 @@
 import { Box, Grid } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import NewsCard from './NewsCard';
 import SearchFilterBar from './SearchFilterBar';
+import { Article } from '../types/article';
 
-const NewsGrid = ({ articles }: { articles: any[] }) => {
+const NewsGrid = ({ articles }: { articles: Article[] }) => {
   const [filteredArticles, setFilteredArticles] = useState(articles);
 
   return (

@@ -4,8 +4,15 @@ import NewsAPI from 'newsapi';
 
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
+interface NewsParams {
+  country: string;
+  language: string;
+  pageSize: number;
+  q: string;
+};
+
 const getArticlesFromAPI = async (q: string | null = null) => {
-  const params: any = {
+  const params: NewsParams = {
     language: 'en',
     pageSize: 10,
   };

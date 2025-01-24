@@ -5,7 +5,7 @@ import {
 
 import NewsGrid from '../components/NewsGrid';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Home() {
   const [articles, setArticles] = useState([]);

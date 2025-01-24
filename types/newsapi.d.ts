@@ -1,6 +1,6 @@
 // src/types/newsapi.d.ts
 declare module 'newsapi' {
-    const value: any;
+    const value: {articles: []};
     export = value;
-  }
+}
   
