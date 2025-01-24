@@ -1,25 +1,27 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  TextField,
   Box,
-  Skeleton,
+  Card,
+  CardContent,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography
 } from '@mui/material';
 import USAStates from './USAStates';
 import { Article } from '../types/article';
 
 const SearchFilterBar = ({
   setFilteredArticles,
+  setIsFetching
 }: {
   setFilteredArticles: React.Dispatch<React.SetStateAction<Article[]>>;
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedState, setSelectedState] = useState('');
-  const [isFetching, setIsFetching] = useState(false);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -54,6 +56,7 @@ const SearchFilterBar = ({
       console.error('Error fetching articles:', error);
       setFilteredArticles([]);
     } finally {
+      debugger;
       setIsFetching(false); 
     }
   };
@@ -89,19 +92,6 @@ const SearchFilterBar = ({
           ))}
         </Select>
       </FormControl>
-
-      {/* Show Skeletons While Fetching */}
-      {isFetching && (
-        <Grid container spacing={2}>
-          {[...Array(10)].map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Skeleton variant="rectangular" width="100%" height={140} />
-              <Skeleton variant="text" width="80%" sx={{ marginTop: 1 }} />
-              <Skeleton variant="text" width="60%" />
-            </Grid>
-          ))}
-        </Grid>
-      )}
     </Box>
   );
 };
