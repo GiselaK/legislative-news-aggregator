@@ -26,7 +26,7 @@ Follow the steps below to set up the project locally:
    git clone https://github.com/GiselaK/legislative-news-aggregator.git
    cd legislative-news-aggregator
 
-2. Get an API Key from News API (https://newsapi.org/) and create a .env file with NEWS_API_KEY key.
+2. Get an API Key from News API (https://newsapi.org/) and create a `.env.local` file with NEWS_API_KEY key.
 
     ```
     NEWS_API_KEY = 
