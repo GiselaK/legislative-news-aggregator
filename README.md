@@ -74,16 +74,21 @@ Run Linting:
             id: uuid
             image_url: string
             link: string
+            news_source_id: uuid
             published_date: timestamp
             title: string
-            source: string
             state_id: uuid
    
         Article Topics:
             article_id: uuid
             id: uuid
             topic_id: uuid
-            
+
+        # Seperate Table so that sorting or filtering off of new sources can be added
+        News Sources:
+            id: uuid
+            name: string
+   
         States:
             code: string
             id: uuid
@@ -136,6 +141,7 @@ Run Linting:
 6. Testing & QA
     - Add unit tests for both front-end and back-end components.
     - Implement automated end-to-end test for search text field and state select.
+    - Integrate Travis or Jenkins for CI/CD. 
 
 7. Internationalization
    - Use i18n to provide in-app vocabulary translations
