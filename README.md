@@ -72,12 +72,18 @@ Run Linting:
             author: string
             description: string
             id: uuid
+            image_url: string
             link: string
             published_date: timestamp
             title: string
-            topic_id: uuid
+            source: string
             state_id: uuid
-
+   
+        Article Topics:
+            article_id: uuid
+            id: uuid
+            topic_id: uuid
+            
         States:
             code: string
             id: uuid
@@ -99,6 +105,13 @@ Run Linting:
         User Topics:
             topic_id: uuid
             user_id: uuid
+       
+        #The uuids are nullable so a user can subscribe to all news in their state, everything about a topic (e.g. climate change), or specfically a topic within their state.
+        Email Subscriptions:
+            id: uuid (primary key)
+            state_id: uuid (nullable, foreign key to States)
+            topic_id: uuid (nullable, foreign key to Topics)
+            user_id: uuid (foreign key to Users)
 
 
     - Although the News API "everything" endpoint doesn’t support topics/categories directly, implementing a topics dropdown for users would enhance the experience. This can be done similarly to states, storing topic-based searches in Redis for reuse, as they are likely to be commonly clicked.
